@@ -49,7 +49,7 @@ debug_warped = None
 # --- 2. THREADED CAMERA CLASS ---
 class ThreadedCamera:
     def __init__(self, src=0, width=1920, height=1080):
-        self.cap = cv2.VideoCapture(src, cv2.CAP_DSHOW)
+        self.cap = cv2.VideoCapture(src, cv2.CAP_MSMF)
         self.cap.set(cv2.CAP_PROP_FRAME_WIDTH, width)
         self.cap.set(cv2.CAP_PROP_FRAME_HEIGHT, height)
         self.ret, self.frame = self.cap.read()
@@ -112,14 +112,14 @@ def run_ocr_thread(img, polygon_pts):
         mag_ratio=1.0,           
         allowlist=invoice_chars, 
         # Uncomment these to let EasyOCR's AI handle poor lighting naturally:
-        contrast_ths=0.05,        
+        contrast_ths=0.05,      
         adjust_contrast=0.5       
     )
     extracted_text = " ".join(results).strip()
     
     if extracted_text and not extracted_text.startswith("ERROR"):
         session_scans.append(extracted_text)
-        
+
     state = "RESULT"
 
 ## OLD ###
